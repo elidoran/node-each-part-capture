@@ -35,7 +35,7 @@ result =
 capturer.write 'wont match any pattern'
 # *nothing* is pushed to the next stream. non-matching strings are *ignored*
 # by default. override this via the `ignore` option at creation time:
-nonIgnoringCapturer = buildCapturer /some regex/, ignore:false
+nonIgnoringCapturer = buildCapturer [/some regex/], ignore:false
 # this capturer will provide unmatchable strings in a `unknown` property on `result`
 result =
   unknown: 'wont match any pattern'
