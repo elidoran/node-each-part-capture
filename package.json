@@ -1,6 +1,6 @@
 {
   "name": "each-part-capture",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Transform uses array of regex's to run exec() on each part and pass on capture results to next stream.",
   "main": "lib",
   "keywords": [
