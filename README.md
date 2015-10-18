@@ -24,11 +24,21 @@ capturer = buildCapturer [ /(\w+)=(\d+)/ ]
 # write a string which will match the regular expression
 capturer.write 'num=12345'
 
-# capturer will push an object to the next stream:
+# capturer will push an object, `result` to the next stream with
+# the `capture` property containing the regex.exec(string) result:
 result =
-  capture: # the result object of the regex.exec(string) call
+  capture:
   # capture[1] = 'num'
   # capture[2] = 12345
+
+# write a string which does *NOT* match any of the regex's
+capturer.write 'wont match any pattern'
+# *nothing* is pushed to the next stream. non-matching strings are *ignored*
+# by default. override this via the `ignore` option at creation time:
+nonIgnoringCapturer = buildCapturer /some regex/, ignore:false
+# this capturer will provide unmatchable strings in a `unknown` property on `result`
+result =
+  unknown: 'wont match any pattern'
 ```
 
 ## Usage: Stream Pipeline
