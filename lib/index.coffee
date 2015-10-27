@@ -22,9 +22,10 @@ class Capturer extends require('stream').Transform
     # default to ignoring unmatched parts
     @ignore = options?.ignore ? true
 
-  _transform: (string, encoding, next) ->
-    # ensure it's a string
-    string = string.toString 'utf8'
+  _transform: (input, encoding, next) ->
+    if 'string' is typeof input then string = input
+    else if Buffer.isBuffer input then string = input.toString 'utf8'
+    else if input.string? then string = input.string
 
     # run each regex's exec() until a match is found, or there are no more
     for regex in @regexes
